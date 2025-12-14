@@ -1,34 +1,58 @@
-site_name: Mon Portfolio
+site_name: Portfolio Louis Paret
 site_url: https://louis-06.github.io/Portfolio-V2/
+site_author: Louis Paret
+site_description: Portfolio de Louis Paret - BTS SIO option SISR
 
 theme:
   name: material
+  custom_dir: overrides
+  language: fr
   palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
+    # Mode clair
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: deep purple
       toggle:
         icon: material/brightness-7
-        name: Mode sombre
-    - scheme: slate
-      primary: indigo
-      accent: indigo
+        name: Passer au mode sombre
+    # Mode sombre
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: deep purple
       toggle:
         icon: material/brightness-4
-        name: Mode clair
+        name: Passer au mode clair
+  
   features:
+    - navigation.instant
+    - navigation.tracking
     - navigation.tabs
     - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
+    - content.tabs.link
+  
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  icon:
+    logo: material/code-braces
+
+extra_css:
+  - assets/styles.css
+
+extra_javascript:
+  - javascripts/custom.js
 
 nav:
   - Accueil: index.md
-  - À propos: about.md
-  - Projets: projects.md
-  - Contact: contact.md
+  - Compétences: competences.md
+  - Certifications: certifications.md
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -36,5 +60,19 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - attr_list
   - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - pymdownx.details
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/votre-profil/
+    - icon: fontawesome/brands/github
+      link: https://github.com/louis-06
