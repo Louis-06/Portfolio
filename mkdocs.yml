@@ -5,7 +5,6 @@ site_description: Portfolio de Louis Paret - BTS SIO option SISR
 
 theme:
   name: material
-  custom_dir: overrides
   language: fr
   palette:
     # Mode clair
