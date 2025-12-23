@@ -43,7 +43,7 @@ theme:
     logo: material/code-braces
 
 extra_css:
-  - assets/styles.css
+  - assets/style.css
 
 extra_javascript:
   - javascripts/custom.js
@@ -72,6 +72,6 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/votre-profil/
+      link: https://www.linkedin.com/in/louis-paret-7a02b0332/
     - icon: fontawesome/brands/github
-      link: https://github.com/louis-06
+      link: https://github.com/Louis-06

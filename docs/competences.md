@@ -1,12 +1,9 @@
 # Tableau de synthèse des compétences
 
 <div class="competences-header">
-  <a href="assets/e5-tableau-de-synthese.pdf" target="_blank" class="md-button md-button--primary">
-    :material-file-pdf-box: Voir le tableau E5
+  <a href="../assets/e5-tableau-de-synthese.pdf" target="_blank" class="md-button md-button--primary">
+    Voir le tableau E5
   </a>
-  <button onclick="toggleTableSize()" class="md-button" id="expandBtn">
-    :material-arrow-expand-all: Agrandir
-  </button>
 </div>
 
 ---
@@ -31,33 +28,3 @@
 </div>
 
 ---
-
-## Compétences détaillées
-
-### :fontawesome-solid-network-wired: Administration systèmes et réseaux
-
-!!! success "Compétences maîtrisées"
-    - Installation et configuration de serveurs
-    - Gestion du patrimoine informatique
-    - Administration de systèmes d'exploitation
-
-### :fontawesome-solid-headset: Support et assistance
-
-!!! info "Support technique"
-    - Gestion des incidents via GLPI
-    - Ticketing SAV avec Monday
-    - Assistance aux utilisateurs
-
-### :fontawesome-solid-globe: Présence en ligne
-
-!!! note "Développement web"
-    - Création de sites WordPress
-    - Gestion de contenu en ligne
-    - Développement de la présence digitale
-
-### :fontawesome-solid-diagram-project: Mode projet
-
-!!! tip "Gestion de projet"
-    - Travail collaboratif
-    - Respect des deadlines
-    - Documentation technique
