@@ -38,9 +38,6 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  
-  icon:
-    logo: material/code-braces
 
 extra_css:
   - assets/style.css
@@ -52,6 +49,7 @@ nav:
   - Accueil: index.md
   - Compétences: competences.md
   - Certifications: certifications.md
+  - Contact: contact.md
 
 markdown_extensions:
   - pymdownx.highlight:

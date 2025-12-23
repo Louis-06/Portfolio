@@ -4,6 +4,9 @@
   <a href="../assets/e5-tableau-de-synthese.pdf" target="_blank" class="md-button md-button--primary">
     Voir le tableau E5
   </a>
+  <button onclick="toggleTableSize()" class="md-button" id="expandBtn">
+    ⛶ Tableau en plein écran
+  </button>
 </div>
 
 ---
