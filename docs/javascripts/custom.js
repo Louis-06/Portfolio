@@ -328,7 +328,7 @@ class Parallax {
 
   init() {
     // Ajouter des classes parallax à certains éléments
-    document.querySelectorAll('.hero-section, .stats-grid').forEach(el => {
+      document.querySelectorAll('.stats-grid').forEach(el => {
       this.elements.push({
         element: el,
         speed: 0.3
