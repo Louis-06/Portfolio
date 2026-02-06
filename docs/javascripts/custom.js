@@ -6,9 +6,7 @@ function initPasswordProtection() {
   const passwordError = document.getElementById('passwordError');
   const protectedContent = document.querySelector('.protected-content');
   
-  // Hash SHA-256 du mot de passe (généré avec generate_password_hash.py)
-  // Pour changer le mot de passe, exécutez: python generate_password_hash.py
-  const correctPasswordHash = '9cbcd71f1e6696c9d0d76ff93808dca5d89fecd4a2518490d3c2a02a2f4f67e8';
+  const correctPasswordHash = 'c55102d04893ac2bf5c3585708139a69431ca1e1e258ae5e7945f8031fba4580';
   
   async function hashPassword(password) {
     const msgBuffer = new TextEncoder().encode(password);
