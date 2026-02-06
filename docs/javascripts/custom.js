@@ -1,4 +1,64 @@
 // ========================================
+// Protection par mot de passe
+// ========================================
+function initPasswordProtection() {
+  const passwordOverlay = document.getElementById('passwordOverlay');
+  const passwordForm = document.getElementById('passwordForm');
+  const passwordInput = document.getElementById('passwordInput');
+  const passwordError = document.getElementById('passwordError');
+  const protectedContent = document.querySelector('.protected-content');
+  
+  // Mot de passe (vous pouvez le changer ici)
+  const correctPassword = 'competences2026';
+  
+  // Vérifier si déjà authentifié dans cette session
+  if (sessionStorage.getItem('authenticated') === 'true') {
+    unlockContent();
+    return;
+  }
+  
+  if (passwordForm) {
+    passwordForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const enteredPassword = passwordInput.value;
+      
+      if (enteredPassword === correctPassword) {
+        // Mot de passe correct
+        sessionStorage.setItem('authenticated', 'true');
+        unlockContent();
+      } else {
+        // Mot de passe incorrect
+        passwordError.classList.add('show');
+        passwordInput.value = '';
+        passwordInput.focus();
+        
+        // Masquer l'erreur après 3 secondes
+        setTimeout(() => {
+          passwordError.classList.remove('show');
+        }, 3000);
+      }
+    });
+  }
+  
+  function unlockContent() {
+    if (passwordOverlay) {
+      passwordOverlay.classList.add('hidden');
+    }
+    if (protectedContent) {
+      protectedContent.classList.add('unlocked');
+    }
+  }
+}
+
+// Initialiser la protection au chargement de la page
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPasswordProtection);
+} else {
+  initPasswordProtection();
+}
+
+// ========================================
 // Fonction pour agrandir/réduire le tableau en plein écran
 // ========================================
 function toggleTableSize() {
