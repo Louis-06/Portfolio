@@ -17,14 +17,12 @@ if __name__ == "__main__":
     print("=" * 60)
     print()
     
-    # Demander le mot de passe de manière sécurisée
     password = getpass.getpass("Entrez le mot de passe à hasher : ")
     
     if not password:
         print("❌ Erreur : Le mot de passe ne peut pas être vide.")
         exit(1)
     
-    # Générer le hash
     password_hash = generate_hash(password)
     
     print()

@@ -1,8 +1,7 @@
-<!-- Overlay de mot de passe -->
 <div class="password-overlay" id="passwordOverlay">
   <div class="password-container">
     <h2>🔒 Page protégée</h2>
-    <p>Veuillez entrer le mot de passe pour accéder aux compétences</p>
+    <p>Veuillez entrer le mot de passe pour accéder à cette page</p>
     <form class="password-form" id="passwordForm">
       <input 
         type="password" 

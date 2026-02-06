@@ -1,6 +1,4 @@
-// ========================================
-// Protection par mot de passe
-// ========================================
+
 function initPasswordProtection() {
   const passwordOverlay = document.getElementById('passwordOverlay');
   const passwordForm = document.getElementById('passwordForm');
@@ -10,9 +8,8 @@ function initPasswordProtection() {
   
   // Hash SHA-256 du mot de passe (généré avec generate_password_hash.py)
   // Pour changer le mot de passe, exécutez: python generate_password_hash.py
-  const correctPasswordHash = 'ef0c6b232773a409925af2a39ea8f8fc46f34aa47091e9ec13e08edd67e47c43';
+  const correctPasswordHash = '9cbcd71f1e6696c9d0d76ff93808dca5d89fecd4a2518490d3c2a02a2f4f67e8';
   
-  // Fonction pour hasher le mot de passe saisi
   async function hashPassword(password) {
     const msgBuffer = new TextEncoder().encode(password);
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -21,7 +18,6 @@ function initPasswordProtection() {
     return hashHex;
   }
   
-  // Vérifier si déjà authentifié dans cette session
   if (sessionStorage.getItem('authenticated') === 'true') {
     unlockContent();
     return;
@@ -33,20 +29,16 @@ function initPasswordProtection() {
       
       const enteredPassword = passwordInput.value;
       
-      // Hasher le mot de passe saisi
       const enteredPasswordHash = await hashPassword(enteredPassword);
       
       if (enteredPasswordHash === correctPasswordHash) {
-        // Mot de passe correct
         sessionStorage.setItem('authenticated', 'true');
         unlockContent();
       } else {
-        // Mot de passe incorrect
         passwordError.classList.add('show');
         passwordInput.value = '';
         passwordInput.focus();
         
-        // Masquer l'erreur après 3 secondes
         setTimeout(() => {
           passwordError.classList.remove('show');
         }, 3000);
@@ -64,16 +56,12 @@ function initPasswordProtection() {
   }
 }
 
-// Initialiser la protection au chargement de la page
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initPasswordProtection);
 } else {
   initPasswordProtection();
 }
 
-// ========================================
-// Fonction pour agrandir/réduire le tableau en plein écran
-// ========================================
 function toggleTableSize() {
   const tableWrapper = document.getElementById('tableWrapper');
   const btn = document.getElementById('expandBtn');
@@ -83,15 +71,12 @@ function toggleTableSize() {
     tableWrapper.classList.toggle('fullscreen');
     body.classList.toggle('fullscreen-active');
     
-    // Créer ou supprimer l'overlay
     let overlay = document.querySelector('.fullscreen-overlay');
     
     if (tableWrapper.classList.contains('fullscreen')) {
-      // Mode plein écran activé
       btn.innerHTML = '✕ Fermer';
       btn.classList.add('fullscreen-close', 'visible');
       
-      // Créer l'overlay si n'existe pas
       if (!overlay) {
         overlay = document.createElement('div');
         overlay.className = 'fullscreen-overlay';
@@ -99,13 +84,10 @@ function toggleTableSize() {
       }
       overlay.classList.add('active');
       
-      // Fermer avec Echap
       document.addEventListener('keydown', closeOnEscape);
       
-      // Fermer en cliquant sur l'overlay
       overlay.addEventListener('click', toggleTableSize);
     } else {
-      // Mode normal
       btn.innerHTML = '⛶ Agrandir';
       btn.classList.remove('fullscreen-close', 'visible');
       
@@ -118,7 +100,6 @@ function toggleTableSize() {
   }
 }
 
-// Fonction pour fermer avec la touche Echap
 function closeOnEscape(e) {
   if (e.key === 'Escape') {
     const tableWrapper = document.getElementById('tableWrapper');
@@ -128,18 +109,13 @@ function closeOnEscape(e) {
   }
 }
 
-// ========================================
-// Fonction pour filtrer les certifications
-// ========================================
 function filterCerts(category) {
   const cards = document.querySelectorAll('.cert-card');
   const buttons = document.querySelectorAll('.filter-btn');
   
-  // Mettre à jour les boutons actifs
   buttons.forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
   
-  // Filtrer les cartes
   cards.forEach(card => {
     if (category === 'all') {
       card.classList.remove('hidden');
@@ -153,11 +129,8 @@ function filterCerts(category) {
   });
 }
 
-// ========================================
-// Animation au scroll (optionnel)
-// ========================================
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Observer pour les animations au scroll
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -172,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, observerOptions);
   
-  // Observer les cartes de compétences et certifications
   document.querySelectorAll('.skill-card, .cert-card, .stat-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
@@ -181,9 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// ========================================
-// Compte à rebours pour les statistiques
-// ========================================
 function animateValue(element, start, end, duration) {
   let startTimestamp = null;
   const step = (timestamp) => {
@@ -197,7 +166,6 @@ function animateValue(element, start, end, duration) {
   window.requestAnimationFrame(step);
 }
 
-// Animer les chiffres des statistiques quand ils sont visibles
 document.addEventListener('DOMContentLoaded', function() {
   const statNumbers = document.querySelectorAll('.stat-number');
   
@@ -215,9 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
   statNumbers.forEach(stat => statObserver.observe(stat));
 });
 
-// ========================================
-// Particules animées violettes en arrière-plan
-// ========================================
 class Particle {
   constructor(canvas) {
     this.canvas = canvas;
@@ -233,7 +198,6 @@ class Particle {
     this.x += this.speedX;
     this.y += this.speedY;
 
-    // Rebond sur les bords
     if (this.x > this.canvas.width || this.x < 0) {
       this.speedX *= -1;
     }
@@ -267,7 +231,7 @@ class ParticleSystem {
     
     this.ctx = this.canvas.getContext('2d');
     this.particles = [];
-    this.numberOfParticles = 50; // Nombre modéré de particules
+    this.numberOfParticles = 50; 
     
     this.resize();
     this.init();
@@ -322,14 +286,11 @@ class ParticleSystem {
   }
 }
 
-// Initialiser les particules au chargement
 document.addEventListener('DOMContentLoaded', () => {
   new ParticleSystem();
 });
 
-// ========================================
-// Scroll Reveal - Animations au défilement
-// ========================================
+
 class ScrollReveal {
   constructor() {
     this.elements = [];
@@ -339,7 +300,6 @@ class ScrollReveal {
   }
 
   init() {
-    // Sélectionner tous les éléments à animer
     const selectors = [
       '.skill-card',
       '.cert-card',
@@ -361,7 +321,6 @@ class ScrollReveal {
       });
     });
 
-    // Vérifier immédiatement les éléments visibles
     this.checkElements();
   }
 
@@ -372,11 +331,10 @@ class ScrollReveal {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
           el.classList.add('revealed');
-        }, index * 50); // Délai progressif
+        }, index * 50); 
       }
     });
 
-    // Nettoyer les éléments déjà révélés
     this.elements = this.elements.filter(el => !el.classList.contains('revealed'));
   }
 
@@ -389,9 +347,6 @@ class ScrollReveal {
   }
 }
 
-// ========================================
-// Effet Parallax
-// ========================================
 class Parallax {
   constructor() {
     this.elements = [];
@@ -400,7 +355,6 @@ class Parallax {
   }
 
   init() {
-    // Ajouter des classes parallax à certains éléments
       document.querySelectorAll('.stats-grid').forEach(el => {
       this.elements.push({
         element: el,
@@ -417,7 +371,6 @@ class Parallax {
       const elementHeight = element.offsetHeight;
       const windowHeight = window.innerHeight;
       
-      // Calculer si l'élément est visible
       if (scrollY + windowHeight > elementTop && scrollY < elementTop + elementHeight) {
         const offset = (scrollY - elementTop) * speed;
         element.style.transform = `translateY(${offset}px)`;
@@ -426,15 +379,10 @@ class Parallax {
   }
 }
 
-// Initialiser au chargement
 document.addEventListener('DOMContentLoaded', () => {
   new ScrollReveal();
   new Parallax();
 });
-
-// ========================================
-// Code Konami + Jeu Snake
-// ========================================
 
 class KonamiCode {
   constructor(callback) {
@@ -476,7 +424,6 @@ class SnakeGame {
   }
 
   init() {
-    // Créer l'overlay
     const overlay = document.createElement('div');
     overlay.id = 'snake-overlay';
     overlay.style.cssText = `
@@ -494,7 +441,6 @@ class SnakeGame {
       animation: fadeIn 0.3s ease;
     `;
 
-    // Titre
     const title = document.createElement('h2');
     title.textContent = 'SNAKE GAME';
     title.style.cssText = `
@@ -505,7 +451,6 @@ class SnakeGame {
     `;
     overlay.appendChild(title);
 
-    // Score
     const scoreDisplay = document.createElement('div');
     scoreDisplay.id = 'snake-score';
     scoreDisplay.textContent = 'Score: 0';
@@ -516,7 +461,6 @@ class SnakeGame {
     `;
     overlay.appendChild(scoreDisplay);
 
-    // Canvas
     this.canvas = document.createElement('canvas');
     this.canvas.width = this.gridSize * this.tileCount;
     this.canvas.height = this.gridSize * this.tileCount;
@@ -527,7 +471,6 @@ class SnakeGame {
     `;
     overlay.appendChild(this.canvas);
 
-    // Instructions
     const instructions = document.createElement('div');
     instructions.innerHTML = `
       <p style="color: white; margin-top: 1rem; text-align: center;">
@@ -551,11 +494,9 @@ class SnakeGame {
 
     this.ctx = this.canvas.getContext('2d');
 
-    // Event listeners
     document.addEventListener('keydown', (e) => this.handleKeyPress(e));
     document.getElementById('close-snake').addEventListener('click', () => this.close());
 
-    // Initialiser le jeu
     this.reset();
     this.gameLoop = setInterval(() => this.update(), 100);
   }
@@ -578,7 +519,6 @@ class SnakeGame {
       y: Math.floor(Math.random() * this.tileCount)
     };
     
-    // Vérifier que la nourriture n'est pas sur le serpent
     for (let segment of this.snake) {
       if (segment.x === this.food.x && segment.y === this.food.y) {
         this.spawnFood();
@@ -616,7 +556,6 @@ class SnakeGame {
   update() {
     this.direction = this.nextDirection;
 
-    // Nouvelle position de la tête
     const head = { ...this.snake[0] };
     
     switch(this.direction) {
@@ -626,13 +565,11 @@ class SnakeGame {
       case 'right': head.x++; break;
     }
 
-    // Collision avec les murs
     if (head.x < 0 || head.x >= this.tileCount || head.y < 0 || head.y >= this.tileCount) {
       this.gameOver();
       return;
     }
 
-    // Collision avec soi-même
     for (let segment of this.snake) {
       if (segment.x === head.x && segment.y === head.y) {
         this.gameOver();
@@ -642,7 +579,6 @@ class SnakeGame {
 
     this.snake.unshift(head);
 
-    // Manger la nourriture
     if (head.x === this.food.x && head.y === this.food.y) {
       this.score += 10;
       document.getElementById('snake-score').textContent = `Score: ${this.score}`;
@@ -655,11 +591,9 @@ class SnakeGame {
   }
 
   draw() {
-    // Fond
     this.ctx.fillStyle = '#1a1a2e';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Grille
     this.ctx.strokeStyle = 'rgba(124, 58, 237, 0.1)';
     for (let i = 0; i <= this.tileCount; i++) {
       this.ctx.beginPath();
@@ -673,7 +607,6 @@ class SnakeGame {
       this.ctx.stroke();
     }
 
-    // Serpent
     this.snake.forEach((segment, index) => {
       const gradient = this.ctx.createLinearGradient(
         segment.x * this.gridSize,
@@ -699,7 +632,6 @@ class SnakeGame {
       );
     });
 
-    // Nourriture
     this.ctx.fillStyle = '#10b981';
     this.ctx.beginPath();
     this.ctx.arc(
@@ -750,21 +682,17 @@ class SnakeGame {
   }
 }
 
-// Initialiser le code Konami
 document.addEventListener('DOMContentLoaded', () => {
   new KonamiCode(() => {
-    // Animation de célébration
     document.body.style.animation = 'shake 0.5s';
     setTimeout(() => {
       document.body.style.animation = '';
     }, 500);
     
-    // Lancer le jeu
     new SnakeGame().init();
   });
 });
 
-// Animation shake
 const style = document.createElement('style');
 style.textContent = `
   @keyframes shake {
