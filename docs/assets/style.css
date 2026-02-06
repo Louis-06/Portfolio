@@ -103,12 +103,18 @@
 }
 
 .protected-content {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .protected-content.unlocked {
-  display: block;
-  animation: fadeIn 0.5s ease;
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+  overflow: visible;
 }
 
 @keyframes fadeIn {

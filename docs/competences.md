@@ -18,8 +18,7 @@
   </div>
 </div>
 
-<!-- Contenu protégé -->
-<div class="protected-content">
+<div class="protected-content" markdown="1">
 
 # Tableau de synthèse des compétences
 
@@ -56,4 +55,3 @@
 ---
 
 </div>
-<!-- Fin du contenu protégé -->
