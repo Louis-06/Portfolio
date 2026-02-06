@@ -8,8 +8,18 @@ function initPasswordProtection() {
   const passwordError = document.getElementById('passwordError');
   const protectedContent = document.querySelector('.protected-content');
   
-  // Mot de passe (vous pouvez le changer ici)
-  const correctPassword = 'competences2026';
+  // Hash SHA-256 du mot de passe (généré avec generate_password_hash.py)
+  // Pour changer le mot de passe, exécutez: python generate_password_hash.py
+  const correctPasswordHash = 'ef0c6b232773a409925af2a39ea8f8fc46f34aa47091e9ec13e08edd67e47c43';
+  
+  // Fonction pour hasher le mot de passe saisi
+  async function hashPassword(password) {
+    const msgBuffer = new TextEncoder().encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+  }
   
   // Vérifier si déjà authentifié dans cette session
   if (sessionStorage.getItem('authenticated') === 'true') {
@@ -18,12 +28,15 @@ function initPasswordProtection() {
   }
   
   if (passwordForm) {
-    passwordForm.addEventListener('submit', function(e) {
+    passwordForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       
       const enteredPassword = passwordInput.value;
       
-      if (enteredPassword === correctPassword) {
+      // Hasher le mot de passe saisi
+      const enteredPasswordHash = await hashPassword(enteredPassword);
+      
+      if (enteredPasswordHash === correctPasswordHash) {
         // Mot de passe correct
         sessionStorage.setItem('authenticated', 'true');
         unlockContent();
