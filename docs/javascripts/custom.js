@@ -21,27 +21,52 @@ function initPasswordProtection() {
     return;
   }
   
+  async function checkPassword() {
+    const enteredPassword = passwordInput.value;
+    
+    if (!enteredPassword) return;
+    
+    const enteredPasswordHash = await hashPassword(enteredPassword);
+    
+    if (enteredPasswordHash === correctPasswordHash) {
+      sessionStorage.setItem('authenticated', 'true');
+      unlockContent();
+    } else {
+      passwordError.classList.add('show');
+      passwordInput.value = '';
+      passwordInput.focus();
+      
+      setTimeout(() => {
+        passwordError.classList.remove('show');
+      }, 3000);
+    }
+  }
+  
   if (passwordForm) {
+    // Événement submit du formulaire
     passwordForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      
-      const enteredPassword = passwordInput.value;
-      
-      const enteredPasswordHash = await hashPassword(enteredPassword);
-      
-      if (enteredPasswordHash === correctPasswordHash) {
-        sessionStorage.setItem('authenticated', 'true');
-        unlockContent();
-      } else {
-        passwordError.classList.add('show');
-        passwordInput.value = '';
-        passwordInput.focus();
-        
-        setTimeout(() => {
-          passwordError.classList.remove('show');
-        }, 3000);
-      }
+      await checkPassword();
     });
+    
+    // Événement click sur le bouton (pour mobile)
+    const submitButton = passwordForm.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.addEventListener('click', async function(e) {
+        e.preventDefault();
+        await checkPassword();
+      });
+    }
+    
+    // Événement Enter sur l'input (pour mobile)
+    if (passwordInput) {
+      passwordInput.addEventListener('keypress', async function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          await checkPassword();
+        }
+      });
+    }
   }
   
   function unlockContent() {

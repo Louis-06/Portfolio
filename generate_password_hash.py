@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
 Script pour générer un hash SHA-256 d'un mot de passe.
-Utilisez ce script pour créer le hash à mettre dans custom.js
 """
 
 import hashlib

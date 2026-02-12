@@ -2,13 +2,15 @@
   <div class="password-container">
     <h2>🔒 Page protégée</h2>
     <p>Veuillez entrer le mot de passe pour accéder à cette page</p>
-    <form class="password-form" id="passwordForm">
+    <form class="password-form" id="passwordForm" onsubmit="return false;">
       <input 
         type="password" 
         id="passwordInput" 
         class="password-input" 
         placeholder="Mot de passe"
         autocomplete="off"
+        inputmode="text"
+        enterkeyhint="go"
         required
       />
       <button type="submit" class="password-submit">Déverrouiller</button>
