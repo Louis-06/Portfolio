@@ -1,26 +1,3 @@
-<div class="password-overlay" id="passwordOverlay">
-  <div class="password-container">
-    <h2>🔒 Page protégée</h2>
-    <p>Veuillez entrer le mot de passe pour accéder à cette page</p>
-    <form class="password-form" id="passwordForm" onsubmit="return false;">
-      <input 
-        type="password" 
-        id="passwordInput" 
-        class="password-input" 
-        placeholder="Mot de passe"
-        autocomplete="off"
-        inputmode="text"
-        enterkeyhint="go"
-        required
-      />
-      <button type="submit" class="password-submit">Déverrouiller</button>
-      <div class="password-error" id="passwordError">❌ Mot de passe incorrect</div>
-    </form>
-  </div>
-</div>
-
-<div class="protected-content" markdown="1">
-
 # Tableau de synthèse des compétences
 
 <div class="competences-header">
@@ -54,5 +31,3 @@
 </div>
 
 ---
-
-</div>
